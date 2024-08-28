@@ -1,16 +1,35 @@
 from g4f.client import Client
+import g4f
 
 
-client = Client()
+class ParsGPT:
+    client = Client()
 
-def translate(text_for_translate):
-    response = client.chat.completions.create(
-        model="gpt-4",
-        messages=[{"role": "user", "content": f'Просто переведи на русский, не добавляй абсолютно ничего, только перевод и всё. Ничего больше не пиши.\n"{text_for_translate}"'}]
-    )
-    text = response.choices[0].message.content
+    def translateClient(self, text_user):
+        print("Start gpt")
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{
+                "role":
+                "user",
+                "content":
+                f'Просто переведи на русский язык.\n"{text_user}"'
+            }])
+        text = response.choices[0].message.content
 
-    # if ( (text[0] in ["'", '"']) and (text[-1] in ["'", '"']) ):
-    #         text = text[1:-1]
+        return text
 
-    return text
+    def translate(self, text_user):
+        text = g4f.ChatCompletion.create(
+            model='gpt-3.5-turbo',
+            messages=[{
+                "role":
+                "user",
+                "content":
+                f'Просто переведи на РУССКИЙ язык и дай мне ничего больше не напиши.\n"{text_user}"'
+            }])
+
+        if ((text[0] in ["'", '"']) and (text[-1] in ["'", '"'])):
+            text = text[1:-1]
+
+        return text
