@@ -1,9 +1,10 @@
 import aiohttp
-import asyncio
 from bs4 import BeautifulSoup as BS
 from random import randint
 
+
 class RequestQuotes:
+
     def __init__(self, tag):
         self.tag = tag
         self.page = "1"
@@ -20,9 +21,15 @@ class RequestQuotes:
         max_quote = len(quotes)
         if max_quote != 0:
             random_quote = randint(1, max_quote)
-            quote_item = quotes[random_quote - 1].find("div", class_="quoteText")
-            text = quote_item.text.replace("\n", "").replace("    ", "").strip()
-            quote = text[0:text.find("  ―")]
+            quote_item = quotes[random_quote - 1].find("div",
+                                                       class_="quoteText")
+            text = quote_item.text.replace("\n", "").replace("    ",
+                                                             "").strip()
+            quote = text
+            del_text = quote_item.find("a", class_="authorOrTitle")
+            if del_text:
+                print()
+                quote = text.replace(del_text.text, "").strip()
 
             return quote
         else:
