@@ -32,3 +32,5 @@ def teach_me():
 @app.route("/")
 def test():
   return ("Hello")
+
+app.run(debug=True)
