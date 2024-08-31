@@ -18,7 +18,7 @@ def translateGpt():
 def get_random_quote():
   tag = request.json["tag"]
   quote = asyncio.run(RequestQuotes(tag).random_quote())
-  return jsonify("quote":quote)
+  return jsonify({"quote":quote})
 
 @app.route("/")
 def test():
