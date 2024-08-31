@@ -7,17 +7,16 @@ class ParsGPT:
     def __init__(self):
         self.client = Client()
 
-    def translateClient(self, text_user):
+    def teach(self, text_user, orginal):
         print("Start GPT")
-        response = self.client.chat.completions.create(
+        text = g4f.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[{
                 "role":
                 "user",
                 "content":
-                f'Просто переведи на русский язык.\n"{text_user}"'
+                f'Оргинал:\n"{orginal}"\nЭто мой перевод(перевод могут быт не быть):{text_user}\nСкажи правильно ли я переводил? Смысол я понял или нет? Где я ошибся? Какие правильное каие не правильное? Как можно ещё лучше? Как на самом деле оно переводится?'
             }])
-        text = response.choices[0].message.content
         return text
 
     def translate(self, text_user):

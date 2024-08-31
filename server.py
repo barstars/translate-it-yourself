@@ -20,6 +20,15 @@ def get_random_quote():
   quote = asyncio.run(RequestQuotes(tag).random_quote())
   return jsonify({"quote":quote})
 
+
+@app.route("/teach_me",methods=["POST"])
+def teach_me():
+  orginal = request.json["orginal"]
+  user_translate = request.json["user_translate"]
+  
+  teach = ParsGPT().teach(user_translate,orginal)
+  return jsonify({"teach":teach})
+
 @app.route("/")
 def test():
   return ("Hello")
