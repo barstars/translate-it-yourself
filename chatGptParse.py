@@ -8,20 +8,19 @@ class ParsGPT:
         self.client = Client()
 
     def teach(self, text_user, orginal):
-        print("Start GPT")
         text = g4f.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[{
                 "role":
                 "user",
                 "content":
-                f'Оргинал:\n"{orginal}"\nЭто мой перевод(перевод могут быт не быть):{text_user}\nСкажи правильно ли я переводил? Смысол я понял или нет? Где я ошибся? Какие правильное каие не правильное? Как можно ещё лучше? Как на самом деле оно переводится?'
+                f'Оригинал цитаты:\n"{orginal}"\nМой перевод:\n"{text_user}"\nПожалуйста, проверьте мой перевод. Правильно ли я перевел? Если нет, укажите ошибки и предоставьте правильный перевод. Пожалуйста, объясните, как каждый элемент цитаты должен быть переведен и где я мог ошибиться.'
             }])
         return text
 
     def translate(self, text_user):
         text = g4f.ChatCompletion.create(
-            model='gpt-3.5-turbo',
+            model='gpt-4',
             messages=[{
                 "role":
                 "user",
